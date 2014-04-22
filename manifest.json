@@ -7,10 +7,8 @@
     "https://www.bbcredux.com/*",
     "https://i.bbcredux.com/*"
   ],      
-  "background": {
-    "scripts": [
-      "reduxcast.js"
-    ]
+  "content-scripts": {
+    "js": [ "reduxcast.js" ]
   },
   "manifest_version": 2
 }
