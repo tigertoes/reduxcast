@@ -3,7 +3,9 @@
   "description": "Playback Redux stored content onto your Chromecast",
   "version": "0.1",
   "permissions": [
-    "contextMenus"
+    "debugger",
+    "https://www.bbcredux.com/*",
+    "https://i.bbcredux.com/*"
   ],      
   "background": {
     "scripts": [
