@@ -1,0 +1,14 @@
+{
+  "name": "Reduxcast",
+  "description": "Playback Redux stored content onto your Chromecast",
+  "version": "0.1",
+  "permissions": [
+    "contextMenus"
+  ],      
+  "background": {
+    "scripts": [
+      "reduxcast.js"
+    ]
+  },
+  "manifest_version": 2
+}
