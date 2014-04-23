@@ -16,16 +16,44 @@ function chromeCastForte() {
 
   var attempts = 0,
       max_attempts = 5;
-  setTimeout(isAvailable, 1000);
+
+  isAvailable();
+
+  // Check the receiver code is loaded and ready
   function isAvailable(){ 
-    console.info("Attempt: " + attempts); 
     if(attempts >= max_attempts){
+      console.error("Maximum attempts reached");
       return;
-    } 
+    }
     if(!chrome.cast || !chrome.cast.isAvailable){ 
-      setTimeout(isAvailable, 1000); return; 
-    } 
-    console.log(chrome);
+      attempts++;
+      setTimeout(isAvailable, 1000);
+      return;
+    }
+    console.info("YABBA DABBA DOO~");
+    setupChromeCast();
+  }
+
+  function sessionListener(e) {
+
+  }
+
+  function receiverListener(e) {
+
+  }
+
+  function onInitSuccess(){
+
+  }
+
+  function onError(){
+
+  }
+
+  function setupChromeCast(){
+    var sessionRequest = new chrome.cast.SessionRequest(chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID);
+    var apiConfig = new chrome.cast.ApiConfig(sessionRequest, sessionListener, receiverListener);
+    chrome.cast.initialize(apiConfig, onInitSuccess, onError);
   }
 
 LOL*/
