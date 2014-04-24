@@ -25,17 +25,17 @@ function chromeCastForte() {
 /*LOL
 
   var attempts = 0,
-      maxAttempts = 5;
+      maxAttempts = 30;
 
-  isAvailable();
+  window.onLoad = isAvailable();
 
   // Check the receiver code is loaded and ready
-  function isAvailable(){ 
+  function isAvailable(){
     if(attempts >= maxAttempts){
       console.error("Maximum attempts reached");
       return;
     }
-    if(!chrome.cast || !chrome.cast.isAvailable){ 
+    if(!chrome.cast || !chrome.cast.isAvailable){
       attempts++;
       setTimeout(isAvailable, 1000);
       return;
@@ -76,6 +76,12 @@ LOL*/
 var script = document.createElement('script');
 script.src = chromecastSenderSrc;
 document.head.appendChild(script);
+
+// Inject playback button in
+var header = document.getElementsByTagName('h2')[0],
+    headerTitle = header.innerText,
+    imageSrc = '<img id="chromecast_button" src="' + chrome.extension.getURL("cast_off.png") + '"/>';
+header.innerHTML = headerTitle + imageSrc;
 
 var nasty = document.createElement('script');
 nasty.setAttribute('type', 'text/javascript');
