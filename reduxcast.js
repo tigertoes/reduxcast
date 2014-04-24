@@ -1,27 +1,37 @@
+/**
+ *                   __                           __
+ *    ________  ____/ /_  ___  ___________ ______/ /_
+ *   / ___/ _ \/ __  / / / / |/_/ ___/ __ `/ ___/ __/
+ *  / /  /  __/ /_/ / /_/ />  </ /__/ /_/ (__  ) /_
+ * /_/   \___/\__,_/\__,_/_/|_|\___/\__,_/____/\__/
+ *
+ */
 'use strict';
 
-var chromecast_app_id     = '',
-    chromecast_sender_src = 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js';
+var chromecastSenderSrc = 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js';
 
-var script    = document.createElement('script');
-script.src    = chromecast_sender_src;
-document.head.appendChild(script);
-
-/*
+/**
+ * A brief explanation of what is going on here:
+ * Content script extensions in Chrome seggregate the scopes of extension
+ * runtime and page runtime - which means we can't access global variables like
+ * chrome.cast in the page from this end. To work around it, we have to inject
+ * JS into the page's DOM and have it evaluated. Given we need to push quite a
+ * bit in, the below method essentially is a here-doc, something Javascript is
+ * as yet able to support.
+ *
  * Shout out to Zv_oDD over at http://stackoverflow.com/a/14416259 for this.
  */
-
 function chromeCastForte() {
 /*LOL
 
   var attempts = 0,
-      max_attempts = 5;
+      maxAttempts = 5;
 
   isAvailable();
 
   // Check the receiver code is loaded and ready
   function isAvailable(){ 
-    if(attempts >= max_attempts){
+    if(attempts >= maxAttempts){
       console.error("Maximum attempts reached");
       return;
     }
@@ -30,7 +40,6 @@ function chromeCastForte() {
       setTimeout(isAvailable, 1000);
       return;
     }
-    console.info("YABBA DABBA DOO~");
     setupChromeCast();
   }
 
@@ -64,7 +73,11 @@ LOL*/
   return str.replace(new RegExp("\\n"+here+"\\*/",'m'),'').toString();
 }
 
+var script = document.createElement('script');
+script.src = chromecastSenderSrc;
+document.head.appendChild(script);
+
 var nasty = document.createElement('script');
 nasty.setAttribute('type', 'text/javascript');
-nasty.innerHTML =  chromeCastForte();
+nasty.innerHTML = chromeCastForte();
 document.head.appendChild(nasty);
