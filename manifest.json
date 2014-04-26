@@ -2,8 +2,10 @@
   "name": "Reduxcast",
   "description": "Playback Redux stored content onto your Chromecast",
   "version": "0.1",
+  "icons": {
+    "128": "logo.png"
+  },
   "permissions": [
-    "tabs",
     "https://www.bbcredux.com/*",
     "https://i.bbcredux.com/*"
   ],      
