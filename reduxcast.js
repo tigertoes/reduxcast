@@ -26,9 +26,12 @@ function chromeCastForte() {
 
   var attempts    = 0,
       maxAttempts = 30,
-      delay       = 1000;
+      delay       = 1000,
+      isReady     = false,
+      media       = false;
 
   window.onLoad = isAvailable();
+  document.getElementById('chromecast_button').onclick = playVideo;
 
   function isAvailable(){
     if(attempts >= maxAttempts){
@@ -45,12 +48,12 @@ function chromeCastForte() {
 
   function sessionListener(e) {
     console.info('Session Listener initialised');
-    console.log(e);
   }
 
   function receiverListener(e) {
     console.info('Receiver Listener initialised');
-    console.log(e);
+    if(e !== chrome.cast.ReceiverAvailability.AVAILABLE) return;
+    isReady = true;
   }
 
   function onInitSuccess(e) {
@@ -58,6 +61,7 @@ function chromeCastForte() {
   }
 
   function onError(e) {
+    //TODO change/hide the icon?
   }
 
   function setupChromeCast() {
@@ -69,6 +73,7 @@ function chromeCastForte() {
   }
 
   function playVideo(){
+    if(!isReady) return;
     var source = document.getElementsByTagName('source');
     if(source.length <=0) {
       console.error("Video can't be found, huh?");
