@@ -24,8 +24,9 @@ var chromecastSenderSrc = 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.j
 function chromeCastForte() {
 /*LOL
 
-  var attempts = 0,
-      maxAttempts = 30;
+  var attempts    = 0,
+      maxAttempts = 30,
+      delay       = 1000;
 
   window.onLoad = isAvailable();
 
@@ -36,39 +37,34 @@ function chromeCastForte() {
     }
     if(!chrome.cast || !chrome.cast.isAvailable){
       attempts++;
-      setTimeout(isAvailable, 1000);
+      setTimeout(isAvailable, delay);
       return;
     }
     setupChromeCast();
   }
 
   function sessionListener(e) {
+    console.info('Session Listener initialised');
     console.log(e);
   }
 
   function receiverListener(e) {
-    if(e === chrome.cast.ReceiverAvailability.AVAILABLE) {
-      console.info("Receiver now available...");
-      var button = document.getElementById("chromecast_button");
-      if(button) {
-        button.onclick = playVideo;
-      } else {
-        console.warn("What? No button?!");
-      }
-    }
+    console.info('Receiver Listener initialised');
+    console.log(e);
   }
 
-  function onInitSuccess(){
-    console.info("Chromecast successfully setup, let's roll");
+  function onInitSuccess(e) {
+    console.info('Chromecast initialised!');
   }
 
-  function onError(){
-    console.warn("Unable to get Chromecast off the ground!");
+  function onError(e) {
   }
 
-  function setupChromeCast(){
+  function setupChromeCast() {
     var sessionRequest = new chrome.cast.SessionRequest(chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID);
-    var apiConfig = new chrome.cast.ApiConfig(sessionRequest, sessionListener, receiverListener);
+    var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
+      sessionListener,
+      receiverListener);
     chrome.cast.initialize(apiConfig, onInitSuccess, onError);
   }
 
@@ -82,9 +78,12 @@ function chromeCastForte() {
     console.info("Sending " + url + " outbound!");
     chrome.cast.requestSession(function(session){
       var mediaInfo = new chrome.cast.media.MediaInfo(url);
+      mediaInfo.contentType = 'video/mp4';
       var request = new chrome.cast.media.LoadRequest(mediaInfo);
       session.loadMedia(request,
-      onMediaDiscovered.bind(this, 'loadMedia'),
+      function(e){
+        console.log('here');
+      },
       function(e){
         console.error("Unable to cast: " + e.code);
       }); //FIXME callback hell
@@ -92,10 +91,6 @@ function chromeCastForte() {
     }, function(e) {
       console.error('Error: ' + e.code);
     });
-  }
-
-  function onMediaDiscovered(how, media) {
-    console.log(media);
   }
 
 LOL*/
