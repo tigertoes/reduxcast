@@ -10,6 +10,25 @@
 
 var chromecastSenderSrc = 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js';
 
+if(document.location.pathname.match(/^\/asset/)) {
+  // Inject the sender script
+  var script = document.createElement('script');
+  script.src = chromecastSenderSrc;
+  document.head.appendChild(script);
+
+  // Inject playback button in
+  var header = document.getElementsByTagName('h2')[0],
+      headerTitle = header.innerText,
+      imageSrc = '<img id="chromecast_button" src="' + chrome.extension.getURL("cast_off.png") + '"/>';
+  header.innerHTML = headerTitle + imageSrc;
+
+  // Inject our own JS
+  var nasty = document.createElement('script');
+  nasty.setAttribute('type', 'text/javascript');
+  nasty.innerHTML = chromeCastForte();
+  document.head.appendChild(nasty);
+}
+
 /**
  * A brief explanation of what is going on here:
  * Content script extensions in Chrome seggregate the scopes of extension
@@ -108,18 +127,3 @@ LOL*/
   str = str.replace(new RegExp("/\\*"+here+"\\n",'m'),'').toString();
   return str.replace(new RegExp("\\n"+here+"\\*/",'m'),'').toString();
 }
-
-var script = document.createElement('script');
-script.src = chromecastSenderSrc;
-document.head.appendChild(script);
-
-// Inject playback button in
-var header = document.getElementsByTagName('h2')[0],
-    headerTitle = header.innerText,
-    imageSrc = '<img id="chromecast_button" src="' + chrome.extension.getURL("cast_off.png") + '"/>';
-header.innerHTML = headerTitle + imageSrc;
-
-var nasty = document.createElement('script');
-nasty.setAttribute('type', 'text/javascript');
-nasty.innerHTML = chromeCastForte();
-document.head.appendChild(nasty);
