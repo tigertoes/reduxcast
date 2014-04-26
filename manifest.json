@@ -1,7 +1,7 @@
 {
   "name": "Reduxcast",
   "description": "Playback Redux stored content onto your Chromecast",
-  "version": "0.1",
+  "version": "0.0.1",
   "icons": {
     "128": "logo.png"
   },
