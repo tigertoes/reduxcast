@@ -11,9 +11,9 @@
   ],      
   "content_scripts": [{
      "matches": ["https://www.bbcredux.com/*", "https://i.bbcredux.com/*"],
-          "js": ["reduxcast.js"],
+          "js": ["extension.js", "reduxcast.js"],
          "css": ["reduxcast.css"]
   }],
-  "web_accessible_resources":["cast_off.png"],
+  "web_accessible_resources":["cast_off.png", "reduxcast.js"],
   "manifest_version": 2
 }
