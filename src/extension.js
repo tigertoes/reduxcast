@@ -19,11 +19,12 @@ if(document.location.pathname.match(/^\/asset/)) {
   // Inject playback button in
   var header = document.getElementsByTagName('h2')[0],
       headerTitle = header.innerText,
-      imageSrc = '<img id="chromecast_button" src="' + chrome.extension.getURL("cast_off.png") + '"/>';
+      imageSrc = '<img id="chromecast_button" src="' + 
+                 chrome.extension.getURL("img/cast_off.png") + '"/>';
   header.innerHTML = headerTitle + imageSrc;
 
   // Inject our own JS
   var reduxcast = document.createElement('script');
-  reduxcast.src = chrome.extension.getURL('reduxcast.js');
+  reduxcast.src = chrome.extension.getURL('src/reduxcast.js');
   document.head.appendChild(reduxcast);
 }

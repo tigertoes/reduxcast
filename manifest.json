@@ -3,7 +3,7 @@
   "description": "Playback Redux stored content onto your Chromecast",
   "version": "0.0.1",
   "icons": {
-    "128": "logo.png"
+    "128": "img/logo.png"
   },
   "permissions": [
     "https://www.bbcredux.com/*",
@@ -11,9 +11,9 @@
   ],      
   "content_scripts": [{
      "matches": ["https://www.bbcredux.com/*", "https://i.bbcredux.com/*"],
-          "js": ["extension.js", "reduxcast.js"],
-         "css": ["reduxcast.css"]
+          "js": ["src/extension.js", "src/reduxcast.js"],
+         "css": ["css/reduxcast.css"]
   }],
-  "web_accessible_resources":["cast_off.png", "reduxcast.js"],
+  "web_accessible_resources":["img/cast_off.png", "src/reduxcast.js"],
   "manifest_version": 2
 }
