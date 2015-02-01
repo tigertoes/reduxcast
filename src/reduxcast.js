@@ -41,7 +41,14 @@ function onInitSuccess(e) {
 }
 
 function onError(e) {
-  //TODO change/hide the icon?
+  var chromeButton = document.getElementById(buttonId);
+  if(!chromeButton) return;
+
+  // XXX: Regexing an src attribute is nasty
+  var imgUrl = chromeButton.getAttribute('src');
+  imgUrl.replace(/cast_off/, 'error');
+  chromeButton.setAttribute('src', imgUrl);
+  chromeButton.onclick = function() { return false };
 }
 
 function onMediaDiscovered(how, newMedia) {
