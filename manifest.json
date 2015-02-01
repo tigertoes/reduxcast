@@ -14,6 +14,6 @@
           "js": ["src/extension.js", "src/reduxcast.js"],
          "css": ["css/reduxcast.css"]
   }],
-  "web_accessible_resources":["img/cast_off.png", "src/reduxcast.js"],
+  "web_accessible_resources":["img/error.png", "img/cast_off.png", "src/reduxcast.js"],
   "manifest_version": 2
 }
