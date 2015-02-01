@@ -35,6 +35,9 @@ function receiverListener(e) {
 
 function onInitSuccess(e) {
   console.info('Chromecast initialised!');
+  var chromeButton = document.getElementById(buttonId);
+  if(!chromeButton) return;
+  chromeButton.setAttribute('style', 'display: block');
 }
 
 function onError(e) {

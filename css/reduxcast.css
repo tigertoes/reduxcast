@@ -1,3 +1,4 @@
 img#chromecast_button {
-padding-left: 8pt;
+  padding-left: 8pt;
+  display: none;
 }
